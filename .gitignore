@@ -1,0 +1,1 @@
+-e "pycache/\n*.pyc\n*.joblib\n*.pkl\n.env\nvenv\n.envrc\n.env*\n.ipynb_checkpoints\n.DS_Store" 
