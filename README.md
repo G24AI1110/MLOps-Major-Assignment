@@ -55,7 +55,15 @@ Using the `pytest` framework.
 
 ##  Manual Quantization
 
-Quantization is manually performed in `train.py` by rounding the model's coefficients to two decimal places. This reduces file size and floating-point precision. The script also prints the model file size before and after quantization for comparison.
+
+The `quantize.py` script:
+- Loads the original `model.joblib`.
+- Performs **manual quantization** by converting each model coefficient and intercept into **uint8** format using individual per-weight scale factors and zero-points.
+- Dequantizes the model to approximate the original values.
+- Evaluates the quantized model and compares it against the original model.
+- Reports model size and R² score before and after quantization.
+
+This method significantly improves accuracy compared to simple rounding or global min-max methods, ensuring lower loss with quantization.
 
 ---
 
@@ -82,8 +90,8 @@ This ensures automated testing and deployment in a production-like environment.
 
 | Metric                        | Before Quantization         | After Quantization   |
 | ----------------------------- | --------------------------- | -------------------- |
-| Model File (`model.pkl`) Size | 1.09 KB                     |  0.79KB              |
-| Impact on Accuracy (R²)       | 0.5758                      | 0.5747               |
+| Model File               Size | 1.12 KB                     | 0.43 KB              |
+| Impact on Accuracy (R²)       | 0.5758                      | 0.5758               |
 
 ##  Requirements
 
